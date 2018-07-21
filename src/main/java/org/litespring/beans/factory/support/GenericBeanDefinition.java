@@ -2,6 +2,9 @@ package org.litespring.beans.factory.support;
 
 import org.litespring.beans.BeanDefinition;
 
+/*
+ * 具体实现类
+ */
 public class GenericBeanDefinition implements BeanDefinition {
 	private String id;
 	private String beanClassName;
@@ -9,7 +12,6 @@ public class GenericBeanDefinition implements BeanDefinition {
 	private boolean prototype = false;
 	private String scope = SCOPE_DEFAULT;
 	public GenericBeanDefinition(String id, String beanClassName) {
-		
 		this.id = id;
 		this.beanClassName = beanClassName;
 	}

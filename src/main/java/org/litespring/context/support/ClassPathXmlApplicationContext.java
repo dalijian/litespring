@@ -9,7 +9,11 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 		super(configFile);
 		
 	}
-
+/*
+ * 通过classpath 加载 配置xml文件
+ * (non-Javadoc)
+ * @see org.litespring.context.support.AbstractApplicationContext#getResourceByPath(java.lang.String)
+ */
 	@Override
 	protected Resource getResourceByPath(String path) {
 		

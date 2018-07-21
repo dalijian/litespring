@@ -7,7 +7,9 @@ import java.io.InputStream;
 
 import org.litespring.util.Assert;
 
-
+/*
+ * 从文件系统中加载配置文件
+ */
 
 public class FileSystemResource implements Resource {
 

@@ -1,10 +1,18 @@
 package org.litespring.util;
 
 
-
+/*
+ * 定义类加载器
+ */
 public abstract class ClassUtils {
+	/*
+	 * 静态方法
+	 */
 	public static ClassLoader getDefaultClassLoader() {
 		ClassLoader cl = null;
+		/*
+		 * 默认加载器Thread.currentThread().getContextClassLoader()
+		 */
 		try {
 			cl = Thread.currentThread().getContextClassLoader();
 		}
