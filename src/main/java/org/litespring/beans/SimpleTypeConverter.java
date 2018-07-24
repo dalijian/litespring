@@ -8,8 +8,13 @@ import org.litespring.beans.propertyeditors.CustomBooleanEditor;
 import org.litespring.beans.propertyeditors.CustomNumberEditor;
 import org.litespring.util.ClassUtils;
 
+/*
+ * 将TypeConverter 封装
+ */
 public class SimpleTypeConverter implements TypeConverter {
-	
+	/*用Map封装各种类型的PropertyEditor
+	 * 
+	 */
 	private Map<Class<?>, PropertyEditor> defaultEditors;
 	
 	public SimpleTypeConverter(){
@@ -20,7 +25,7 @@ public class SimpleTypeConverter implements TypeConverter {
 		if(ClassUtils.isAssignableValue(requiredType, value)){
 			return (T)value;			
 		} else{
-			if(value instanceof String){
+			if(value instanceof String){ //判断值是否值String类型
 				PropertyEditor editor = findDefaultEditor(requiredType);
 				try{
 					editor.setAsText((String)value);

@@ -69,25 +69,32 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry
 			throw new BeanCreationException("create bean for "+ beanClassName +" failed",e);
 		}	
 	}
+	/*
+	 * 使用java.Beans拿到bean的属性并赋值
+	 */
 	protected void populateBean(BeanDefinition bd, Object bean){
 		List<PropertyValue> pvs = bd.getPropertyValues();
-		
+		//判断是否有属性
 		if (pvs == null || pvs.isEmpty()) {
 			return;
 		}
 		
+		
 		BeanDefinitionValueResolver valueResolver = new BeanDefinitionValueResolver(this);
+		
 		SimpleTypeConverter converter = new SimpleTypeConverter(); 
 		try{
-			
+			//使用java.beans.Introsepector 拿到bean 的 BeanInfo 对象
+			//通过BeanInfo拿到属性
 			BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
 			PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
 			
 			for (PropertyValue pv : pvs){
 				String propertyName = pv.getName();
 				Object originalValue = pv.getValue();
+				//将RuntimeReference 转换成 实际的bean对象
 				Object resolvedValue = valueResolver.resolveValueIfNecessary(originalValue);			
-				
+				//得到属性对应的bean对象后赋值给bean
 				for (PropertyDescriptor pd : pds) {
 					if(pd.getName().equals(propertyName)){
 						Object convertedValue = converter.convertIfNecessary(resolvedValue, pd.getPropertyType());

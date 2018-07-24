@@ -14,5 +14,9 @@ public interface BeanDefinition {
 	
 	public String getBeanClassName();
 	
+	
+	/*
+	 * 保存 property属性PropertyValue
+	 */
 	public List<PropertyValue> getPropertyValues();
 }
