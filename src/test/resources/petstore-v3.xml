@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- xmlns是xml命名空间的意思，而xmlns:xsi是指xml所遵守的标签规范 -->
+
+<!-- xsi:schemaLocation：用于声明了目标名称空间的模式文档 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans

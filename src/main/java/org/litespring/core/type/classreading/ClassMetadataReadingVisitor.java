@@ -7,9 +7,16 @@ import org.springframework.asm.Opcodes;
 import org.springframework.asm.SpringAsmInfo;
 
 
-
+/**
+ * 自定义的Classvisitor 用来解析class字节码文件
+ * @author lijian
+ *
+ */
 public class ClassMetadataReadingVisitor extends ClassVisitor implements ClassMetadata {
-
+	
+	/**
+	 * 字节码对象的属性
+	 */
 	private String className;
 
 	private boolean isInterface;
@@ -28,9 +35,11 @@ public class ClassMetadataReadingVisitor extends ClassVisitor implements ClassMe
 		super(SpringAsmInfo.ASM_VERSION);
 	}
 
-
+	/**
+	 * 覆写的visit方法  处理  class字节码文件 reader 的值
+	 */
 	public void visit(int version, int access, String name, String signature, String supername, String[] interfaces) {
-		this.className = ClassUtils.convertResourcePathToClassName(name);
+		this.className = ClassUtils.convertResourcePathToClassName(name); //将resource 中的'/'换成'.'
 		this.isInterface = ((access & Opcodes.ACC_INTERFACE) != 0);
 		this.isAbstract = ((access & Opcodes.ACC_ABSTRACT) != 0);
 		this.isFinal = ((access & Opcodes.ACC_FINAL) != 0);

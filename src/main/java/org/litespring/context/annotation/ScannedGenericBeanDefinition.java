@@ -4,6 +4,7 @@ import org.litespring.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.litespring.beans.factory.support.GenericBeanDefinition;
 import org.litespring.core.type.AnnotationMetadata;
 
+//beandefinition 带有annotation信息的 beanDefinition
 public class ScannedGenericBeanDefinition extends GenericBeanDefinition implements AnnotatedBeanDefinition {
 
 	private final AnnotationMetadata metadata;

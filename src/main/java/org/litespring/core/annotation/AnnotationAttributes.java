@@ -8,7 +8,11 @@ import java.util.Map;
 
 import org.litespring.util.Assert;
 
-
+/**
+ * 用这个类来存储 annotationAttribute
+ * @author lijian
+ *
+ */
 @SuppressWarnings("serial")
 public class AnnotationAttributes extends LinkedHashMap<String, Object> {
 

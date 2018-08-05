@@ -3,6 +3,7 @@ package org.litespring.beans.factory.xml;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,6 +66,7 @@ public class XmlBeanDefinitionReader {
 			Iterator<Element> iter = root.elementIterator();
 			while(iter.hasNext()){
 				Element ele = (Element)iter.next();
+				//得到命名空间的url
 				String namespaceUri = ele.getNamespaceURI();
 				if(this.isDefaultNamespace(namespaceUri)){
 					parseDefaultElement(ele); //普通的bean
@@ -87,13 +89,21 @@ public class XmlBeanDefinitionReader {
 		}
 		
 	}
-	
+	/*
+	 * 解析含有<context:component-scan 的bean。xml
+	 */
 	private void parseComponentElement(Element ele) {
 		String basePackages = ele.attributeValue(BASE_PACKAGE_ATTRIBUTE);
+		//使用package 扫描器 
 		ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(registry);
+		//拿到Set<BeanDefinition> 并向defaultBeanFactory 注册
+		//registry.registerBeanDefinition(candidate.getID(),candidate)
 		scanner.doScan(basePackages);		
 		
 	}
+	/*
+	 * 解析默认bean。xml 不含<context:component-scan
+	 */
 	private void parseDefaultElement(Element ele) {
 		String id = ele.attributeValue(ID_ATTRIBUTE);
 		String beanClassName = ele.attributeValue(CLASS_ATTRIBUTE);
@@ -106,6 +116,7 @@ public class XmlBeanDefinitionReader {
 		this.registry.registerBeanDefinition(id, bd);
 		
 	}
+	//判断是否与默认命名空间相同
 	public boolean isDefaultNamespace(String namespaceUri) {
 		return (!StringUtils.hasLength(namespaceUri) || BEANS_NAMESPACE_URI.equals(namespaceUri));
 	}

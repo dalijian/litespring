@@ -16,11 +16,20 @@ public class ClassReaderTest {
 
 	@Test
 	public void testGetClasMetaData() throws IOException {
-		ClassPathResource resource = new ClassPathResource("org/litespring/service/v4/PetStoreService.class");
-		ClassReader reader = new ClassReader(resource.getInputStream());
 		
+		ClassPathResource resource = new ClassPathResource("org/litespring/service/v4/PetStoreService.class");
+		/*
+		 *  ASM 新建ClassReader 读取字节码 
+		 */
+		ClassReader reader = new ClassReader(resource.getInputStream());
+		/*
+		 * 新建Visitor对象 ClassReader对象读取到的信息交给 Visitor对象处理
+		 */
 		ClassMetadataReadingVisitor visitor = new ClassMetadataReadingVisitor();
 		
+		/*
+		 * reader将信息交给Visitor处理
+		 */
 		reader.accept(visitor, ClassReader.SKIP_DEBUG);
 		
 		Assert.assertFalse(visitor.isAbstract());
@@ -41,6 +50,7 @@ public class ClassReaderTest {
 		reader.accept(visitor, ClassReader.SKIP_DEBUG);
 		
 		String annotation = "org.litespring.stereotype.Component";
+		
 		Assert.assertTrue(visitor.hasAnnotation(annotation));
 		
 		AnnotationAttributes attributes = visitor.getAnnotationAttributes(annotation);

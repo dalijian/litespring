@@ -15,14 +15,17 @@ import org.litespring.util.StringUtils;
 public class AnnotationBeanNameGenerator implements BeanNameGenerator {
 
 
+	
 	public String generateBeanName(BeanDefinition definition, BeanDefinitionRegistry registry) {
 		if (definition instanceof AnnotatedBeanDefinition) {
 			String beanName = determineBeanNameFromAnnotation((AnnotatedBeanDefinition) definition);
+		
 			if (StringUtils.hasText(beanName)) {
 				// Explicit bean name found.
 				return beanName;
 			}
 		}
+		//拿到注解 bean id 默认值 类名的首字母小写
 		return buildDefaultBeanName(definition, registry);
 	}
 
@@ -38,6 +41,7 @@ public class AnnotationBeanNameGenerator implements BeanNameGenerator {
 		for (String type : types) {
 			AnnotationAttributes attributes = amd.getAnnotationAttributes(type);
 			if (attributes.get("value") != null) {
+				//@Compenent(value="ljjian")     拿到注解的value值
 				Object value = attributes.get("value");
 				if (value instanceof String) {
 					String strVal = (String) value;

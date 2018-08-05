@@ -11,6 +11,7 @@ import org.litespring.core.io.Resource;
  *
  * @author Juergen Hoeller
  * @since 2.5
+ * 暴露给外部调用的接口
  */
 public interface MetadataReader {
 

@@ -2,6 +2,10 @@ package org.litespring.beans.factory.support;
 
 import org.litespring.beans.BeanDefinition;
 
+/**
+ * bean name 生成器
+ * 
+ */
 public interface BeanNameGenerator {
 
 	/**

@@ -1,6 +1,9 @@
 package org.litespring.core.type;
 
-
+/**
+ * 将解析字节码文件class 封装  
+ * 暴露出来给MetadataReader 调用的接口
+ */
 public interface ClassMetadata {
 
 	/**
